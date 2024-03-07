@@ -1,4 +1,10 @@
-# from django.shortcuts import render
+from django.shortcuts import render
+
+info = {
+    "users_count": 100500,
+    "cards_count": 200600,
+    "menu": ["Главная", "О проекте", "Каталог"]
+}
 
 # Create your views here.
 from django.http import HttpResponse
@@ -16,4 +22,6 @@ def card_detail(request, card_id):
 
 
 def get_all_cards(request):
-    return HttpResponse('Все карточки')
+    """Принимает информацию о проекте info
+    Возвращает по адресу"""
+    return render(request, 'cards/catalog.html', context=info)
