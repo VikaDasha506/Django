@@ -1,14 +1,15 @@
 {% load static %}
+{% load markdown_to_html %}
 {% block head %}<link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>{% endblock %}
 <div class="card border-success" style="max-width: 20rem;">
-  <div class="card-header bg-transparent border-success text-decoration-underline"><h5 class="card-title">{{card.question|truncatechars:20}}</h5></div>
+  <div class="card-header bg-transparent border-success text-decoration-underline"><h5 class="card-title">{% markdown_to_html card.question|truncatechars:20 %}</h5></div>
   <div class="card-body">
-    <h6 class="card-title ">{{card.answer|truncatechars:20}}</h6>
+    <h6 class="card-title ">{% markdown_to_html card.question|truncatechars:20 %}</h6>
       <p class="card-text ">Категория: "{{card.category_id}}"</p>
       Теги:
       {% for tag in card.tags.all %}
       <span class="badge bg-secondary mb-2">
-        <a href="{% url 'cards_by_tag' tag_id=tag.pk %}" class="text-white">{{ tag.name }}</a>
+        <a href="{% url 'cards_by_tag' tag_id=tag.pk %}" class="text-white">#{{ tag.name }}</a>
       </span>
       {% endfor %}
       <p></p>
