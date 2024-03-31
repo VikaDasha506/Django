@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Главная страница сайта{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
+{% endblock %}
+{% block content %}
+    <h1>Главная страница сайта</h1>
+    <p>Добро пожаловать на наш сайт!</p>
+{% endblock %}
+{% block scripts %}<script src="{% static 'cards/js/main.js' %}"></script>{% endblock %}

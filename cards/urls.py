@@ -1,8 +1,11 @@
 from django.urls import path
 from . import views
-#cards/urls.py
-# будет иметь префикс в urls.py
+
 urlpatterns = [
-    path('<int:card_id>/', views.card_detail, name='card_detail'),
-    path('', views.get_all_cards, name='all_cards')
+    path('catalog/', views.get_all_cards, name='catalog'),  # Общий каталог всех карточек
+    path('categories/', views.get_categories, name='categories'),  # Список всех категорий
+    path('categories/<slug:slug>/', views.get_cards_by_category, name='category'),  # Карточки по категории
+    path('tags/<int:tag_id>/', views.get_cards_by_tag, name='cards_by_tag'),  # новый маршрут для просмотра карточек по тегу
+    path('<int:card_id>/detail/', views.get_detail_card_by_id, name='detail_card_by_id'),
+
 ]

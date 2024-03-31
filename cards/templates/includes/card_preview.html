@@ -1,0 +1,25 @@
+{% load static %}
+{% block head %}<link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>{% endblock %}
+<div class="card border-success" style="max-width: 20rem;">
+  <div class="card-header bg-transparent border-success text-decoration-underline"><h5 class="card-title">{{card.question|truncatechars:20}}</h5></div>
+  <div class="card-body">
+    <h6 class="card-title ">{{card.answer|truncatechars:20}}</h6>
+      <p class="card-text ">Категория: "{{card.category_id}}"</p>
+      Теги:
+      {% for tag in card.tags.all %}
+      <span class="badge bg-secondary mb-2">
+        <a href="{% url 'cards_by_tag' tag_id=tag.pk %}" class="text-white">{{ tag.name }}</a>
+      </span>
+      {% endfor %}
+      <p></p>
+      <p class="card-text mb-1 badge rounded-pill bg-light text-dark">ID карточки: {{card.card_id}}</p>
+      <p class="card-text fst-italic mb-1 badge rounded-pill bg-light text-dark">Количество просмотров:{{card.views}}</p>
+      <p class="card-text fst-italic mb-1 badge rounded-pill bg-light text-dark">Добавили в избранное: {{card.adds}}</p>
+    <hr>
+      <a href="{% url 'detail_card_by_id' card_id=card.pk %}" class="btn bg-secondary">Подробнее</a>
+
+  </div>
+  <div class="card-footer badge bg-secondary ">дата: {{card.upload_date}}</div>
+</div>
+
+

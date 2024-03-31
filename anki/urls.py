@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from cards import views
-# Подключаем файл urls.py из приложения cards через include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main),
-    path('cards/', include('cards.urls'))
+    path('', views.main, name='index'),
+    path('about/', views.about, name='about'),
+    path('cards/', include('cards.urls')),
+
 ]
