@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+#ссылка на дет.представ.картоыки /cards/2/detail/
 urlpatterns = [
     path('catalog/', views.get_all_cards, name='catalog'),  # Общий каталог всех карточек
     path('categories/', views.get_categories, name='categories'),  # Список всех категорий

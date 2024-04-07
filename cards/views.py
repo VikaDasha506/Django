@@ -10,8 +10,6 @@ from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from cards.models import Card
-from django.utils import timezone
-import json
 
 info = {
     "users_count": 100500,
@@ -110,14 +108,3 @@ def get_detail_card_by_id(request, card_id):
 
 
 
-# Добавление карточек через shell_plus
-# python manage.py shell_plus
-# for card in cards_data:
-#     Card.objects.create(
-#         question=card["question"],
-#         answer=card["answer"],
-#         upload_date=timezone.now(),
-#         views=0,
-#         adds=0,
-#         tags=json.loads(card["tags"])
-#     )

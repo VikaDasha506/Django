@@ -11,9 +11,9 @@
     Детальная информация о карточке
   </div>
   <div class="card-body ">
-    <h5 class="card-title text-decoration-underline">{% markdown_to_html card.question %}</h5>
-    <p class="card-text"> {% markdown_to_html card.question %} </p>
-      <p class="card-text">Категория: "{{card.category_id}}"</p>
+    <div class="card-header bg-transparent border-success text-decoration-underline"><h5 class="card-title">{% markdown_to_html card.question %}</h5></div>
+    <p class="card-text"> {% markdown_to_html card.answer %} </p>
+      <p class="card-text">Категория: "{{card.category}}"</p>
       Теги:
       {% for tag in card.tags.all %}
       <span class="badge bg-secondary mb-2">
