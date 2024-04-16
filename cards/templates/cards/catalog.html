@@ -5,6 +5,21 @@
 {% endblock %}
 {% block title %}Каталог{% endblock %}
 {% block content %}
+    <div class="mb-3">
+         <form action="{% url 'catalog' %}" method="get">
+            <input type="text" name="search_query" placeholder="Поиск">
+            <button type="submit">Искать</button>
+        </form>
+     </div>
+     <div>Сортировка:
+         <br>
+         <input type="checkbox" name="sort_by_date"> по дате загрузки<br>
+         <input type="checkbox" name="sort_by_views"> по количеству просмотров<br>
+         <input type="checkbox" name="sort_by_favorites"> по количеству добавлений в избранное<br>
+         <br>
+         <input type="radio" name="sort_direction" value="asc"> по возрастанию!
+         <input type="radio" name="sort_direction" value="desc"> по убыванию!
+     </div>
     <h1 class="catalog">Каталог карточек</h1>
     <p>На текущий момент у нас {{cards_count}} карточек.</p>
     <p>Выберете карточку для изучения:</p>

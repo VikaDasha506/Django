@@ -1,5 +1,6 @@
 #  Создаем базу  данных
 from django.db import models
+from django import forms
 
 
 #  Создаем базу  данных
@@ -75,3 +76,19 @@ class Category(models.Model):
 
     def __str__(self):
         return f'Категория: {self.name}'
+
+
+class CardModelForm(forms.ModelForm):
+    class Meta:
+        model = Card
+        fields = ('question', 'answer', 'category', 'tags')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.all()
+        self.fields['tags'].queryset = Tag.objects.all()
+        instance = super().save(commit=False)
+        instance.save()
+        self.instance.tags.clear()  # Очищаем текущие теги, чтобы избежать дублирования
+        # Обрабатываем теги
+
