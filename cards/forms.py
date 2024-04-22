@@ -2,7 +2,9 @@ from django import forms
 from .models import Category, Card, Tag
 
 
-class CardModelForm(forms.Form):
+class CardModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CardModelForm, self).__init__(*args, **kwargs)
     question = forms.CharField(label='Вопрос', max_length=100, widget=forms.TextInput(
         attrs={'class': 'form-control'}))  # label - создает лейбл рядом с полем
     answer = forms.CharField(label='Ответ', max_length=5000, widget=forms.Textarea(

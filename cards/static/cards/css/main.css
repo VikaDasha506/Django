@@ -2,6 +2,7 @@
 h1 {
     background-color: rgb(204, 227, 255);
     text-align: center;
+    height: 80px !important;
 }
 body {
     background-color: AliceBlue;

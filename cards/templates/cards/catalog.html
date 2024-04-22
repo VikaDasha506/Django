@@ -1,26 +1,109 @@
 {% extends "base.html" %}
+{% load cache %}
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
+<style>
+.page-item {
+  margin: 0px !important;
+  }
+nav {
+    width: 30px !important;
+    }
+.form-control {
+    width: 500px !important;
+}
+.btn bg-secondary {
+   color: white !important;
+ }
+</style>
 {% endblock %}
-{% block title %}Каталог{% endblock %}
 {% block content %}
-    <div class="mb-3">
-         <form action="{% url 'catalog' %}" method="get">
-            <input type="text" name="search_query" placeholder="Поиск">
-            <button type="submit">Искать</button>
-        </form>
-     </div>
-     <div>Сортировка:
-         <br>
-         <input type="checkbox" name="sort_by_date"> по дате загрузки<br>
-         <input type="checkbox" name="sort_by_views"> по количеству просмотров<br>
-         <input type="checkbox" name="sort_by_favorites"> по количеству добавлений в избранное<br>
-         <br>
-         <input type="radio" name="sort_direction" value="asc"> по возрастанию!
-         <input type="radio" name="sort_direction" value="desc"> по убыванию!
-     </div>
-    <h1 class="catalog">Каталог карточек</h1>
+<div class="container">
+    <h1 class="mt-2 h1">Каталог карточек</h1>
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="Page navigation" class="text-dark">
+                <ul class="pagination pagination-dark">
+                  {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-white bg-secondary"
+                           href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}&order={{ order }}
+                           {% if search_query %}&search_query={{ search_query }}{% endif %}">
+                            Предыдущая
+                        </a>
+                    </li>
+                  {% endif %}
+                  {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                       <a class="page-link text-white bg-secondary"
+                          href="?page={{ num }}&sort={{ sort }}&order={{ order }}
+                          {% if search_query %}&search_query={{ search_query }}{% endif %}">
+                           {{ num }}
+                       </a>
+                    </li>
+                  {% endfor %}
+                  {% if page_obj.has_next %}
+                     <li class="page-item">
+                         <a class="page-link text-white bg-secondary"
+                            href="?page={{ page_obj.next_page_number }}&sort={{ sort }}&order={{ order }}
+                            {% if search_query %}&search_query={{ search_query }}{% endif %}">
+                             Следующая
+                         </a>
+                     </li>
+                  {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div>
+         <form class="d-flex">
+            <input class="form-control" type="search" placeholder="введите запрос" aria-label="Search">
+            <button class="btn bg-secondary text-white" type="submit">Поиск</button>
+         </form>
+    </div>
+     <form action="{% url 'catalog' %}" method="get" class="mb-5 mt-3">
+    <!-- Радиокнопки для сортировки -->
+  <div class="mb-1 d-flex justify-content-start">
+    <div><strong>Сортировать по:</strong></div>
+    <div class="form-check ms-2">
+      <input class="form-check-input" type="radio" name="sort" id="sortUploadDate" value="upload_date" checked>
+      <label class="form-check-label" for="sortUploadDate">
+        Дате загрузки
+      </label>
+    </div>
+    <div class="form-check ms-2">
+      <input class="form-check-input" type="radio" name="sort" id="sortViews" value="views">
+      <label class="form-check-label" for="sortViews">
+        Просмотрам
+      </label>
+    </div>
+    <div class="form-check ms-2">
+      <input class="form-check-input" type="radio" name="sort" id="sortFavorites" value="favorites">
+      <label class="form-check-label" for="sortFavorites">
+        Избранному
+      </label>
+    </div>
+  </div>
+  <!-- Радиокнопки для выбора направления сортировки
+    order: порядок сортировки ('asc' для возрастания, 'desc' для убывания; по умолчанию 'desc'). -->
+    <div class="mb-1 d-flex justify-content-start">
+      <div><strong>Порядок сортировки:</strong></div>
+      <div class="form-check ms-2">
+        <input class="form-check-input " type="radio" name="order" id="sortOrderDesc" value="desc" checked>
+        <label class="form-check-label" for="sortUploadDate">
+          По убыванию
+        </label>
+      </div>
+      <div class="form-check ms-2">
+        <input class="form-check-input" type="radio" name="order" id="sortOrderAsc" value="asc">
+        <label class="form-check-label" for="sortViews">
+          По возрастанию
+        </label>
+      </div>
+  </form>
+</div>
+    <hr>
     <p>На текущий момент у нас {{cards_count}} карточек.</p>
     <p>Выберете карточку для изучения:</p>
     <ul>
