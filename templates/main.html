@@ -2,10 +2,15 @@
 {% load static %}
 {% block title %}Главная страница сайта{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
+   <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
 {% endblock %}
+
+{% comment %}{% endcomment %}
+
 {% block content %}
+<div class="container">
     <h1>Главная страница сайта</h1>
     <p>Добро пожаловать на наш сайт!</p>
+</div>
 {% endblock %}
 {% block scripts %}<script src="{% static 'cards/js/main.js' %}"></script>{% endblock %}

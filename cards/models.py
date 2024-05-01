@@ -1,6 +1,7 @@
 #  Создаем базу  данных
 from django.db import models
 from django import forms
+from django.contrib.auth import get_user_model
 
 
 #  Создаем базу  данных
@@ -21,6 +22,8 @@ class Card(models.Model):
     check_status = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]),
                                                          Status.choices)), default=Status.UNCHECKED,
                                        verbose_name='Статус проверки')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='cards', null=True,
+                               default=None, verbose_name=('Автор'))
 
     # конструкцию models.ManyToManyField , указывая параметр through для определения
     # промежуточной таблицы, которая управляет связью.

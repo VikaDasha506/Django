@@ -14,7 +14,7 @@ from django.core.paginator import Paginator
 from .models import Card
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
-from .forms import CardModelForm
+from .forms import CardModelForm#, RegisterUserForm
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import get_user_model
@@ -22,6 +22,7 @@ from django.core.cache import cache
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 info = {
     "users_count": 100500,

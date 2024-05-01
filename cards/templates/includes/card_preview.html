@@ -1,6 +1,8 @@
 {% load static %}
 {% load markdown_to_html %}
-{% block head %}<link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>{% endblock %}
+{% block head %}
+   <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
+{% endblock %}
 <div class="card border-success" style="max-width: 20rem;">
   <div class="card-header bg-transparent border-success text-decoration-underline">
     <h5 class="card-title">{% markdown_to_html card.question|truncatechars:20 %}</h5>

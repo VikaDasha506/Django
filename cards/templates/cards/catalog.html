@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 {% load cache %}
 {% load static %}
+
+{% block title %}Каталог{% endblock %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
+
 <style>
 .page-item {
   margin: 0px !important;
   }
-nav {
+.text-dark-1{
     width: 30px !important;
     }
 .form-control {
@@ -15,15 +18,17 @@ nav {
 }
 .btn bg-secondary {
    color: white !important;
- }
+}
 </style>
+    <link rel="stylesheet" href="{% static 'cards/css/main.css' %}"/>
 {% endblock %}
+
 {% block content %}
 <div class="container">
     <h1 class="mt-2 h1">Каталог карточек</h1>
     <div class="row">
         <div class="col-12">
-            <nav aria-label="Page navigation" class="text-dark">
+            <nav aria-label="Page navigation" class="text-dark-1" >
                 <ul class="pagination pagination-dark">
                   {% if page_obj.has_previous %}
                     <li class="page-item">
