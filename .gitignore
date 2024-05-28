@@ -2,14 +2,8 @@
 .idea
 /db.sqlite3
 .vscode/
-anki/__pycache__/
-cards/__pycache__/
-cards/migrations/__pycache__/
-cards/templatetags/__pycache__/
 /lesson_47.db
 uploads/Модуль UML.pdf
-users/__pycache__/
 users/images/
 media/
 .env
-users/migrations/__pycache__/0002_user_github_id_user_vk_id.cpython-311.pyc
